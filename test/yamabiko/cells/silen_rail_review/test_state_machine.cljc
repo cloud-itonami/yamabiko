@@ -2,7 +2,7 @@
   "Tests for yamabiko silen_rail_review state machine (py→cljc port).
    Governance layer: Council 5-of-7 Safe attestation for new wave/trainset/jurisdiction.
    Required before any L1 fabrication."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing]]
             [yamabiko.cells.silen-rail-review.state-machine :as sm]))
 
 (deftest test-review-happy-path
@@ -54,28 +54,28 @@
           decision (get-in s ["review_state" "decision"])
           rationale (get-in s ["review_state" "rationale"])]
       (is (= "approve" decision))
-      (is (clojure.string/includes? rationale "ADR-2605252600"))
-      (is (clojure.string/includes? rationale "Council")))))
+      (is (kotoba.lang.text/includes? rationale "ADR-2605252600"))
+      (is (kotoba.lang.text/includes? rationale "Council")))))
 
 (deftest test-review-rationale-cites-gates-nongoals
   (testing "Rationale cites constitutional gates G1..G14 + non-goals N1..N12"
     (let [s (sm/transition-to-decision-recorded {})
           rationale (get-in s ["review_state" "rationale"])]
-      (is (clojure.string/includes? rationale "G1"))
-      (is (clojure.string/includes? rationale "G14"))
-      (is (clojure.string/includes? rationale "N1"))
-      (is (clojure.string/includes? rationale "N12")))))
+      (is (kotoba.lang.text/includes? rationale "G1"))
+      (is (kotoba.lang.text/includes? rationale "G14"))
+      (is (kotoba.lang.text/includes? rationale "N1"))
+      (is (kotoba.lang.text/includes? rationale "N12")))))
 
 (deftest test-review-council-safe-address
   (testing "Review has Council 5-of-7 Safe address"
     (let [s (sm/transition-to-scope-declared {})
           safe (get-in s ["review_state" "councilSafeAddress"])]
       (is (some? safe))
-      (is (clojure.string/includes? safe "CouncilSafe")))))
+      (is (kotoba.lang.text/includes? safe "CouncilSafe")))))
 
 (deftest test-review-record-structure
   (testing "Review record has all required fields for attestation"
     (let [s (sm/transition-to-record-emitted {})
           record (get s "silen_rail_review")]
       (is (some? (get record "recordedAt")))
-      (is (clojure.string/starts-with? (get record "recordedAt") "2026")))))
+      (is (kotoba.lang.text/starts-with? (get record "recordedAt") "2026")))))

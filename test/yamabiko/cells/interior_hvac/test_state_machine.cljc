@@ -2,7 +2,7 @@
   "Tests for yamabiko interior_hvac state machine (py→cljc port).
    Covers interior assembly: floor → seating → accessibility → HVAC → PIS → attestation.
    Enforces N6 (no ads) and N8 (no face recognition) gates."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing]]
             [yamabiko.cells.interior-hvac.state-machine :as sm]))
 
 (deftest test-interior-happy-path
@@ -53,7 +53,7 @@
           seating (get-in s ["interior_state" "seating"])]
       (is (= "fire-retardant-fabric-EN 45545 R1" (get seating "type")))
       (is (>= (get seating "wheelchairBays") 2))
-      (is (clojure.string/includes? (get seating "n10Note") "single-class")))))
+      (is (kotoba.lang.text/includes? (get seating "n10Note") "single-class")))))
 
 (deftest test-interior-accessibility-full
   (testing "Accessibility features are complete"

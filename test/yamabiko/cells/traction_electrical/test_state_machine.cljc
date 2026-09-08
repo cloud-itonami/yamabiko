@@ -1,7 +1,7 @@
 (ns yamabiko.cells.traction-electrical.test-state-machine
   "Tests for yamabiko traction_electrical state machine (py→cljc port).
    Enforces G1 + N5 (Apache 2.0 + Charter Rider) + G7 propulsion guard + N7 (no GoA 4)."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing]]
             [yamabiko.cells.traction-electrical.state-machine :as sm]))
 
 (deftest test-traction-happy-path
@@ -86,4 +86,4 @@
       (is (= "ETCS-Level-2" (get fw "atpStandard")))
       (is (= "GoA-3" (get fw "atoLevel")))
       (is (= 3 (get fw "atoMaxLevel")))
-      (is (clojure.string/includes? (get fw "n7Note") "N7")))))
+      (is (kotoba.lang.text/includes? (get fw "n7Note") "N7")))))

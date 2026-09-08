@@ -2,7 +2,7 @@
   "Tests for yamabiko homologation_binder state machine (py→cljc port).
    Terminal layer L5c. Enforces G2 (open registry) + G13 (per-trainset DID).
    Aggregates all upstream attestations."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is testing]]
             [yamabiko.cells.homologation-binder.state-machine :as sm]))
 
 (deftest test-homologation-happy-path
@@ -55,15 +55,15 @@
     (let [s (sm/transition-to-serial-assigned {})
           serial (get-in s ["homologation_state" "serial"])]
       (is (some? serial))
-      (is (clojure.string/includes? serial "ETZYAMABIKO"))
-      (is (clojure.string/includes? serial "2026")))))
+      (is (kotoba.lang.text/includes? serial "ETZYAMABIKO"))
+      (is (kotoba.lang.text/includes? serial "2026")))))
 
 (deftest test-homologation-g13-trainset-did
   (testing "G13 enforces per-trainset DID (did:web:etzhayyim.com:yamabiko:trainset:<serial>)"
     (let [s (sm/transition-to-trainset-did-issued {"homologation_state" {"serial" "TEST-SERIAL-001"}})
           did (get-in s ["homologation_state" "trainsetDid"])]
-      (is (clojure.string/includes? did "did:web:etzhayyim.com:yamabiko:trainset:"))
-      (is (clojure.string/includes? did "TEST-SERIAL-001")))))
+      (is (kotoba.lang.text/includes? did "did:web:etzhayyim.com:yamabiko:trainset:"))
+      (is (kotoba.lang.text/includes? did "TEST-SERIAL-001")))))
 
 (deftest test-homologation-authority-review-rams
   (testing "Authority review covers RAMS standards (EN 50126/50128/50129)"
