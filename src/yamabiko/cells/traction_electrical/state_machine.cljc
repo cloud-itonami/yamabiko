@@ -3,7 +3,8 @@
 
   25 kV AC / 1500 V DC pantograph + traction inverter + ATP/ATO firmware.
   G1 + N5 enforcement: ATP/ATO firmware Apache 2.0 + Charter Rider, no NDA.
-  G7 propulsion guard: R0/R1 BEMU+H₂ acceptable; R2+ full electric only.")
+  G7 propulsion guard: R0/R1 BEMU+H₂ acceptable; R2+ full electric only."
+  (:require [kotoba.lang.text]))
 
 (defn- traction-state
   "TractionState defaults merged with any existing \"traction_state\" map (string keys).
@@ -94,11 +95,11 @@
                              "openSourceVerification" {"g1Enforcement" "active"
                                                        "n5Enforcement" "active"
                                                        "firmwareLicense" license-str
-                                                       "containsApache2" (clojure.string/includes? license-str "Apache 2.0")
-                                                       "containsCharterRider" (clojure.string/includes? license-str "Charter Compliance Rider")
+                                                       "containsApache2" (kotoba.lang.text/includes? license-str "Apache 2.0")
+                                                       "containsCharterRider" (kotoba.lang.text/includes? license-str "Charter Compliance Rider")
                                                        "proprietaryNdaPresent" false
-                                                       "accept" (and (clojure.string/includes? license-str "Apache 2.0")
-                                                                     (clojure.string/includes? license-str "Charter Compliance Rider"))}
+                                                       "accept" (and (kotoba.lang.text/includes? license-str "Apache 2.0")
+                                                                     (kotoba.lang.text/includes? license-str "Charter Compliance Rider"))}
                              "phase" "open_source_verified"
                              "completionPct" 92)
      "next_node" "attestation"}))
