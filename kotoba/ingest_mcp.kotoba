@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; yamabiko 山彦 — ingest seed.edn into a live kotoba node (cljc port of ingest_mcp.py).
 ;; ADR-2605252600.
 (ns yamabiko.kotoba.ingest-mcp
