@@ -1,4 +1,4 @@
-# . — CLAUDE.md
+# . — AGENTS.md
 
 ## Identity
 
@@ -99,4 +99,4 @@ cd .
 - `/90-docs/adr/2605252600-yamabiko-high-speed-rail-manufacturing-r0.md`
 - `/20-actors/sarutahiko/README.md` — Road sibling
 - `/orgs/etzhayyim/com-etzhayyim-wadachi/README.md` — Road operator
-- `/CLAUDE.md` — Religious-corp status table row 56
+- `/AGENTS.md` — Religious-corp status table row 56

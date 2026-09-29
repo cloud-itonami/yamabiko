@@ -128,4 +128,4 @@ com.etzhayyim.yamabiko.{
 
 - `/90-docs/adr/2605252600-yamabiko-high-speed-rail-manufacturing-r0.md` — Master ADR
 - `/20-actors/sarutahiko/README.md` — Road sibling
-- `/CLAUDE.md` — Religious-corp status table row 56
+- `/AGENTS.md` — Religious-corp status table row 56
